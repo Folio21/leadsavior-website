@@ -8,88 +8,81 @@ import { CALENDLY_URL } from '../lib/constants.js'
 // STRIPE_WEBSITE_STARTER_URL = "https://buy.stripe.com/..."
 // STRIPE_WEBSITE_PRO_URL = "https://buy.stripe.com/..."
 
-const columns = [
+const starterPlans = [
   {
     product: 'AI Receptionist',
-    plans: [
-      {
-        name: 'Starter',
-        price: 497,
-        features: [
-          'AI chatbot on your website — captures leads 24/7',
-          'Custom-trained on your services, pricing, and FAQs',
-          'Live appointment booking into your calendar',
-          'Answers missed calls 24/7',
-          'Books appointments by phone',
-          'Handles FAQs by voice',
-          'Captures caller info and sends callback messages',
-          'Call transcripts and recordings included',
-        ],
-      },
-      {
-        name: 'Pro',
-        price: 997,
-        popular: true,
-        intro: 'Everything in Starter, plus:',
-        features: [
-          'Lead qualification — filters so you only speak with serious buyers',
-          'Multi-service call routing — directs callers to the right service automatically',
-          'CRM sync — every lead pushed into your CRM instantly',
-          'SMS follow-up — auto-texts leads after every contact',
-          'Review request automation — requests reviews after every completed job',
-          'Automated re-engagement — follows up with cold leads automatically',
-          'Multilingual support — serves Spanish-speaking customers',
-          'Quarterly AI tune-up — we review and improve your setup every 3 months',
-        ],
-      },
+    name: 'Starter',
+    price: 497,
+    features: [
+      'AI chatbot on your website — captures leads 24/7',
+      'Custom-trained on your services, pricing, and FAQs',
+      'Live appointment booking into your calendar',
+      'Answers missed calls 24/7',
+      'Books appointments by phone',
+      'Handles FAQs by voice',
+      'Captures caller info and sends callback messages',
+      'Call transcripts and recordings included',
     ],
   },
   {
     product: 'Review Poacher',
-    plans: [
-      {
-        name: 'One plan',
-        price: 497,
-        features: [
-          'Monitors unlimited competitor Google listings',
-          'Checks for new bad reviews every 4 hours',
-          'Instant alerts when a 1 or 2-star review appears',
-          'Finds reviewer contact information automatically',
-          'Generates personalized outreach messages ready to send',
-          'Set it and forget it — fully automated',
-        ],
-      },
+    name: 'One plan',
+    price: 497,
+    features: [
+      'Monitors unlimited competitor Google listings',
+      'Checks for new bad reviews every 4 hours',
+      'Instant alerts when a 1 or 2-star review appears',
+      'Finds reviewer contact information automatically',
+      'Generates personalized outreach messages ready to send',
+      'Set it and forget it — fully automated',
     ],
   },
   {
     product: 'Website Builder',
-    plans: [
-      {
-        name: 'Starter',
-        price: 497,
-        features: [
-          'Custom-designed website built around your brand',
-          'Mobile-first, fast-loading on all devices',
-          'Local SEO-ready from day one',
-          'Contact and booking forms',
-          'Google Maps embed',
-          'Social media links',
-        ],
-      },
-      {
-        name: 'Pro',
-        price: 997,
-        popular: true,
-        intro: 'Everything in Starter, plus:',
-        features: [
-          'Blog and content section — drives ongoing organic traffic',
-          'Gallery and portfolio — showcase your work to win trust',
-          'Full individual service pages — ranks better in local search',
-          'Google Analytics — track visitors, sources, and conversions',
-          'Speed optimization — fast load times on every device',
-          'Priority support — direct line for edits and updates',
-        ],
-      },
+    name: 'Starter',
+    price: 497,
+    features: [
+      'Custom-designed website built around your brand',
+      'Mobile-first, fast-loading on all devices',
+      'Local SEO-ready from day one',
+      'Contact and booking forms',
+      'Google Maps embed',
+      'Social media links',
+    ],
+  },
+]
+
+const proPlans = [
+  {
+    product: 'AI Receptionist',
+    name: 'Pro',
+    price: 997,
+    popular: true,
+    intro: 'Everything in Starter, plus:',
+    features: [
+      'Lead qualification — filters so you only speak with serious buyers',
+      'Multi-service call routing — directs callers to the right service automatically',
+      'CRM sync — every lead pushed into your CRM instantly',
+      'SMS follow-up — auto-texts leads after every contact',
+      'Review request automation — requests reviews after every completed job',
+      'Automated re-engagement — follows up with cold leads automatically',
+      'Multilingual support — serves Spanish-speaking customers',
+      'Quarterly AI tune-up — we review and improve your setup every 3 months',
+    ],
+  },
+  {
+    product: 'Website Builder',
+    name: 'Pro',
+    price: 997,
+    popular: true,
+    intro: 'Everything in Starter, plus:',
+    features: [
+      'Blog and content section — drives ongoing organic traffic',
+      'Gallery and portfolio — showcase your work to win trust',
+      'Full individual service pages — ranks better in local search',
+      'Google Analytics — track visitors, sources, and conversions',
+      'Speed optimization — fast load times on every device',
+      'Priority support — direct line for edits and updates',
     ],
   },
 ]
@@ -108,7 +101,8 @@ function PlanCard({ plan }) {
           Most Popular
         </span>
       )}
-      <p className="text-sm font-semibold text-muted uppercase tracking-wider">{plan.name}</p>
+      <p className="text-lg font-bold">{plan.product}</p>
+      <p className="mt-1 text-sm font-semibold text-muted uppercase tracking-wider">{plan.name}</p>
       <p className="mt-3">
         <span className="text-4xl font-black">${plan.price}</span>
         <span className="text-muted text-sm">/mo</span>
@@ -147,13 +141,20 @@ export default function Pricing() {
           <p className="mt-4 text-muted text-lg">No long-term contracts. Cancel anytime.</p>
         </FadeIn>
 
-        <div className="mt-16 grid lg:grid-cols-3 gap-8">
-          {columns.map((col, i) => (
-            <FadeIn key={col.product} delay={i * 0.1} className="flex flex-col gap-8">
-              <h3 className="text-xl font-bold text-center -mb-2">{col.product}</h3>
-              {col.plans.map((plan) => (
-                <PlanCard key={plan.name} plan={plan} />
-              ))}
+        {/* Starter row — three $497 plans */}
+        <div className="mt-16 grid md:grid-cols-3 gap-8 items-stretch">
+          {starterPlans.map((plan, i) => (
+            <FadeIn key={plan.product + plan.name} delay={i * 0.1} className="h-full">
+              <PlanCard plan={plan} />
+            </FadeIn>
+          ))}
+        </div>
+
+        {/* Pro row — two $997 plans */}
+        <div className="mt-8 grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto lg:max-w-none lg:px-24">
+          {proPlans.map((plan, i) => (
+            <FadeIn key={plan.product + plan.name} delay={i * 0.1} className="h-full">
+              <PlanCard plan={plan} />
             </FadeIn>
           ))}
         </div>
