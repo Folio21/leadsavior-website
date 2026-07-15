@@ -1,11 +1,18 @@
+import { Link } from 'react-router-dom'
 import { CALENDLY_URL, CONTACT_EMAIL } from '../lib/constants.js'
 
 const links = [
-  { label: 'AI Receptionist', href: '#receptionist' },
-  { label: 'Review Poacher', href: '#review-poacher' },
-  { label: 'Website Builder', href: '#website-builder' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'AI Receptionist', href: '/#receptionist' },
+  { label: 'Review Poacher', href: '/#review-poacher' },
+  { label: 'Website Builder', href: '/#website-builder' },
+  { label: 'Pricing', href: '/#pricing' },
   { label: 'Book a Meeting', href: CALENDLY_URL, external: true },
+]
+
+const legalLinks = [
+  { label: 'Terms of Service', to: '/terms' },
+  { label: 'Privacy Policy', to: '/privacy' },
+  { label: 'Refund & Cancellation Policy', to: '/refunds' },
 ]
 
 export default function Footer() {
@@ -37,11 +44,24 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-teal hover:text-neon transition-colors">
-            {CONTACT_EMAIL}
-          </a>
-          <p className="text-xs text-muted/70">© 2025 LeadSavior AI. All rights reserved.</p>
+        <div className="mt-10 pt-8 border-t border-white/5 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {legalLinks.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                className="text-xs text-muted hover:text-white transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col sm:items-end gap-1.5">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-teal hover:text-neon transition-colors">
+              {CONTACT_EMAIL}
+            </a>
+            <p className="text-xs text-muted/70">© 2025 LeadSavior AI. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>

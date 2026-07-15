@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { CALENDLY_URL } from '../lib/constants.js'
 
 const links = [
-  { label: 'AI Receptionist', href: '#receptionist' },
-  { label: 'Review Poacher', href: '#review-poacher' },
-  { label: 'Website Builder', href: '#website-builder' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'AI Receptionist', href: '/#receptionist' },
+  { label: 'Review Poacher', href: '/#review-poacher' },
+  { label: 'Website Builder', href: '/#website-builder' },
+  { label: 'Pricing', href: '/#pricing' },
 ]
 
 export default function Nav() {
@@ -28,7 +28,7 @@ export default function Nav() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-5 sm:px-8 h-[72px] flex items-center justify-between">
-        <a href="#" className="flex items-baseline gap-0.5 text-xl font-extrabold tracking-tight">
+        <a href="/" className="flex items-baseline gap-0.5 text-xl font-extrabold tracking-tight">
           <span className="text-white">LeadSavior</span>
           <span className="text-teal drop-shadow-[0_0_8px_rgba(0,212,170,0.8)]">.ai</span>
         </a>
